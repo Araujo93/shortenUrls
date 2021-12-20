@@ -1,0 +1,50 @@
+.input__wrapper {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: column;
+   justify-content: center;
+   padding-bottom: 15rem;
+
+   align-content: center;
+
+}
+
+.input-inner {
+    background-color: rgb(125, 78, 185);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.input {
+  padding: 5px 100px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+
+.btn-submit {
+    color: white;
+    background-color: rgb(0, 217, 255);
+    padding:5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.btn-copy {
+    color: white;
+    background-color: rgb(125, 78, 185);
+    margin-left: 20px;
+    margin-bottom: 2px;
+    padding: 2px 8px;
+    border-radius: 5px;
+
+}
+
+.url__list {
+    display: flex;
+    flex-direction: column;
+}
+
+ul li {
+    list-style: nones;
+}
