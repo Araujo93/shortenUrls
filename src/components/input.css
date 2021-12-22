@@ -1,6 +1,5 @@
 .input__wrapper {
    display: flex;
-   flex-wrap: wrap;
    flex-direction: column;
    justify-content: center;
    padding-bottom: 15rem;
