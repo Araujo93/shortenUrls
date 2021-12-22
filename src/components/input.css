@@ -48,3 +48,7 @@
 ul li {
     list-style: nones;
 }
+
+.container__url {
+    display: flex;
+}

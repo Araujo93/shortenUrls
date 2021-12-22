@@ -1,25 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react'
+
 import { v4 as uuidv4 } from 'uuid';
 
 import './input.css'
 
+// Move the complex logic into another file.
 const InputComponent = () => {
     const [shortenLinks, setShortenLinks] = useState('');
     const [ links, setLinks] = useState([])
+    // would have like to finish the copying of the URLS
     const [copySuccess, setCopySuccess] = useState('');
+    // a nicer Looking error message
     const [error, setError] = useState('')
 
-    const inputRef = useRef(null);
+    const copyText = useRef()
 
-    function copyToClipboard(e) {
-        inputRef.current.select();
-        document.execCommand('copy');
-        // This is just personal preference.
-        // I prefer to not show the the whole text area selected.
-        e.target.focus();
-        setCopySuccess('Copied!');
-      };
-
+    console.log(copyText.current)
+// Move the complex logic into another file.
 
 const shoretenLinkAPI = async (url) => {
     try{
@@ -42,6 +39,9 @@ const handleChange = (e) => {
     setShortenLinks(e.target.value)
 }
 
+
+// Load all Urls on reload, but its only finding most recent. Would of rather used a backend database
+// to store all urls and load them
 useEffect(() => {
     try{
         const existingUrls = localStorage.getItem('data');
@@ -54,26 +54,30 @@ useEffect(() => {
 }, [])
 
 
-
+    // Lots of more styling could have been done.
     return (
         <div className='input__wrapper'>
             {error && <p>{error}</p>}
             <div className='input-inner'>
-            <input ref={inputRef} type="text"  placeholder='Shorten a link here...' name='Url' onChange={handleChange} className='input'/>
+            <input type="text"  placeholder='Shorten a link here...' name='Url' onChange={handleChange} className='input'/>
 
             <button className='btn-submit' onClick={() => shoretenLinkAPI(shortenLinks)}>Shorten it!</button>
             </div>
+            
             <ul className='url__list'>
                 {links && links.map((url) => (
-                    <>
-                    <li ref={inputRef} key={uuidv4()}>{url} <button onClick={copyToClipboard}  className='btn-copy'>Copy</button></li>
-                    
-                    </>
+                    <div className='container__url' key={uuidv4()}>
+                    <li ref={copyText} >{url}
+                     </li>
+                     <button  onClick={() => navigator.clipboard.writeText(copyText.current.innerText)}  className='btn-copy'>Copy</button>
+                     
+                    </div>
                 ))}
             </ul>
         </div>
     )
     
+
 }
 
 export default InputComponent
